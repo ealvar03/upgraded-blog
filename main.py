@@ -33,5 +33,17 @@ def get_contact():
     return render_template('contact.html')
 
 
+@app.route("/posts/<int:blog_id>")
+def get_blog(blog_id):
+    """
+    When the user selects a particular post, it will redirect him to all information for that post.
+    """
+    requested_blog = None
+    for post_entry in posts:
+        if post_entry["id"] == blog_id:
+            requested_blog = post_entry
+    return render_template("post.html", post=requested_blog)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
